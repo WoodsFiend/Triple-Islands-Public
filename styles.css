@@ -1,0 +1,349 @@
+/* ==========================
+   Color Palette Variables
+========================== */
+:root {
+    --primary: #2E8B57;                /* Tropical Green – palms and foliage */
+    --accent: #FFD166;                 /* Warm Sand / Sun highlight */
+    --text: #FFFFFF;                    /* White for contrast */
+    --game-fill: #FFFFFF;               /* Text / icon fill */
+    --game-outline: #1F3A3D;            /* Dark Teal outline for contrast */
+    --game-shadow: rgba(0, 0, 0, 0.35);
+
+    --gradient-1: #A0E8FF;             /* Sky Blue */
+    --gradient-2: #2E8B57;             /* Tropical Green */
+    --gradient-3: #FFD166;             /* Sunset Yellow / Sand */
+
+    --bg-blob: rgba(255, 255, 255, 0.08);
+
+    --btn-hover-brightness: 1.15;
+
+    --coming-soon-bg: #FF6F61;         /* Coral accent for ribbons */
+    --coming-soon-shadow: rgba(0,0,0,0.3);
+
+    --screenshot-shadow: rgba(0,0,0,0.25);
+    --screenshot-shadow-hover: rgba(0,0,0,0.4);
+
+    --footer-bg: rgba(47,79,79,0.2);   /* Dark teal transparent for footer */
+    --modal-bg: rgba(0,0,0,0.6);
+    --modal-content-bg: #FFFFFF;
+    --modal-content-text: #1F3A3D;     /* Dark teal text for modal */
+
+    --primary-button-bg: var(--primary);
+    --primary-button-text: var(--text);
+
+    --secondary-button-bg: #FFE4B5;    /* Light sand / neutral button */
+    --secondary-button-text: var(--text);
+}
+/* ==========================
+   Global Styles
+========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Lilita One', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+}
+
+body {
+    background: radial-gradient(circle at top, var(--gradient-1), var(--gradient-2), var(--gradient-3), var(--gradient-2));
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    color: var(--text);
+    text-align: center;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+h1, h2 {
+    color: var(--game-fill);
+    text-shadow:
+        -2px -2px 0 var(--game-outline),
+         2px -2px 0 var(--game-outline),
+        -2px  2px 0 var(--game-outline),
+         2px  2px 0 var(--game-outline),
+         0 4px 10px var(--game-shadow);
+}
+
+p, li, a, span {
+    color: var(--game-fill);
+    text-shadow:
+        -1px -1px 0 var(--game-outline),
+         1px -1px 0 var(--game-outline),
+        -1px  1px 0 var(--game-outline),
+         1px  1px 0 var(--game-outline),
+         0 2px 5px var(--game-shadow);
+}
+
+/* ==========================
+   Animated Gradient
+========================== */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ==========================
+   Floating Background Blobs
+========================== */
+.bg-blob {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: var(--bg-blob);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: float 18s ease-in-out infinite;
+}
+
+.blob1 { top: -100px; left: -100px; }
+.blob2 { bottom: -120px; right: -120px; animation-delay: 6s; }
+
+@keyframes float {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(40px); }
+}
+
+/* ==========================
+   HERO
+========================== */
+.hero { padding: 120px 20px 100px; }
+.hero h1 { font-size: 3rem; margin-bottom: 15px; }
+.tagline { font-size: 1.2rem; margin-bottom: 40px; }
+
+/* ==========================
+   App Icon
+========================== */
+.app-icon {
+    width: 180px;
+    height: 180px;
+    border-radius: 28%;
+    margin-bottom: 25px;
+    box-shadow:
+        0 20px 40px var(--game-shadow),
+        0 0 40px rgba(255,255,255,0.15);
+    animation: iconFloat 4s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.app-icon:hover { transform: scale(1.05); }
+
+@keyframes iconFloat {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+}
+
+/* ==========================
+   Store Buttons
+========================== */
+.store-buttons img {
+    height: 60px;
+    margin: 10px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.store-buttons img:hover {
+    transform: scale(1.08);
+    filter: brightness(var(--btn-hover-brightness));
+}
+
+.store-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.store-link { position: relative; display: inline-block; }
+
+.store-link img {
+    height: 60px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.store-link:hover img { transform: scale(1.08); }
+
+/* Disabled iOS Button */
+.store-link.disabled img.store-button-img {
+    opacity: 0.75;
+    filter: grayscale(30%);
+}
+.store-link.disabled { cursor: not-allowed; }
+.store-link.disabled .coming-soon { opacity: 1; }
+.store-link.disabled:hover img { transform: none; filter: grayscale(30%); }
+
+/* ==========================
+   Coming Soon Ribbon
+========================== */
+.coming-soon {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: var(--coming-soon-bg);
+    font-size: 1rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px var(--coming-soon-shadow);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* ==========================
+   Sections & Features
+========================== */
+.section { padding: 100px 20px; max-width: 1100px; margin: auto; }
+
+.section h2 { margin-bottom: 30px; font-size: 2rem; }
+
+.feature-list {
+    list-style: none;
+    max-width: 600px;
+    margin: auto;
+    text-align: left;
+}
+
+.feature-list li {
+    position: relative;
+    padding-left: 2.5rem;
+    margin: 15px 0;
+    font-size: 1.1rem;
+}
+
+.feature-list li::before {
+    content: attr(data-icon);
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.4rem;
+    line-height: 1;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", sans-serif;
+    text-rendering: optimizeLegibility;
+}
+
+/* ==========================
+   Screenshots
+========================== */
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.screenshot-grid img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px var(--screenshot-shadow);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.screenshot-grid img:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px var(--screenshot-shadow-hover);
+}
+
+/* ==========================
+   Footer
+========================== */
+footer {
+    padding: 40px;
+    background: var(--footer-bg);
+}
+
+footer a {
+    color: var(--text);
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+footer a:hover { text-decoration: underline; }
+
+/* ==========================
+   Scroll Reveal
+========================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================
+   Responsive
+========================== */
+@media (max-width: 600px) {
+    .hero h1 { font-size: 2.2rem; }
+}
+
+/* ==========================
+   Modal
+========================== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--modal-bg);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 20px;
+}
+
+.modal-content {
+    background: var(--modal-content-bg);
+    color: var(--modal-content-text);
+    padding: 40px;
+    border-radius: 18px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    animation: fadeInScale 0.3s ease;
+}
+
+.modal-content h2 { margin-bottom: 20px; }
+
+.modal-content ol { text-align: left; margin: 20px 0; }
+
+.modal-buttons a {
+    display: block;
+    margin: 10px 0;
+    padding: 14px;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.primary-button {
+    background: var(--primary-button-bg);
+    color: var(--primary-button-text);
+}
+
+.secondary-button {
+    background: var(--secondary-button-bg);
+    color: var(--secondary-button-text);
+}
+
+.close {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
