@@ -120,7 +120,7 @@ p, li, a, span {
 .app-icon {
     width: 180px;
     height: 180px;
-    border-radius: 28%;
+    border-radius: 12%;
     margin-bottom: 25px;
     box-shadow:
         0 20px 40px var(--game-shadow),
@@ -212,9 +212,9 @@ p, li, a, span {
 
 .feature-list li {
     position: relative;
-    padding-left: 2.5rem;
+    padding-left: 3rem;
     margin: 15px 0;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
 }
 
 .feature-list li::before {
@@ -222,7 +222,7 @@ p, li, a, span {
     position: absolute;
     left: 0;
     top: 0;
-    font-size: 1.4rem;
+    font-size: 2rem;
     line-height: 1;
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", sans-serif;
     text-rendering: optimizeLegibility;
